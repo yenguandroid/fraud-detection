@@ -30,8 +30,8 @@ def train_logistic_regression(X_train, y_train):
 def train_random_forest(X_train, y_train):
 
     param_grid = {
-        "n_estimators": [100, 200],
-        "max_depth": [10, 20, None]
+        "n_estimators": [50, 100],
+        "max_depth": [10, 15]
     }
 
     rf = RandomForestClassifier(
@@ -40,19 +40,23 @@ def train_random_forest(X_train, y_train):
     )
 
     grid_search = GridSearchCV(
-        rf,
-        param_grid,
-        cv=3,
-        scoring="f1",
-        n_jobs=-1
-    )
+    estimator=rf,
+    param_grid=param_grid,
+    cv=2,
+    scoring="f1",
+    n_jobs=-1
+      )
 
     grid_search.fit(
         X_train,
         y_train
     )
 
-    return grid_search.best_estimator_
+    rf_model = grid_search.best_estimator_
+    return rf_model
+
+    print("Best Parameters:", grid_search.best_params_)
+    print("Best CV Score:", grid_search.best_score_)
 
 
 def evaluate_model(model, X_test, y_test):
