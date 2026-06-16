@@ -190,3 +190,5 @@ The project includes:
 ## Model Persistence
 
 Trained models are saved in the `models/` directory using Joblib for future inference and deployment.
+
+The Random Forest model was selected as the final fraud detection model because it consistently achieved the highest AUC-PR and F1 Score across the evaluated datasets. Additionally, feature importance and SHAP analyses confirmed that the model relies on meaningful behavioral, temporal, and geographic indicators, making its predictions both accurate and interpretable.
